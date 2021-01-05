@@ -32,3 +32,12 @@ alter table board modify(bhate default 0);
 --시퀀스 생성
 create sequence bno_seq start with 1 nomaxvalue;
 create sequence cno_seq start with 1 nomaxvalue;
+
+select * from user_sequences;
+
+ALTER TABLE BOARD ADD TITLE VARCHAR2(50 BYTE);
+select sysdate from dual;
+
+SELECT BNO_SEQ.NEXTVAL FROM DUAL;
+drop sequence bno_seq;
+create sequence bno_seq start with 1 nomaxvalue;

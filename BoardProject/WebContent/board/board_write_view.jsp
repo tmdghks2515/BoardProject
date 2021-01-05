@@ -31,9 +31,9 @@
 	<div id="container">
 		<div id="board">
 			<h3>게시판 글쓰기</h3>
-			<form action="<%=request.getContextPath()%>/board/board_process.jsp">
+			<form action="process/board_write_process.jsp" method="post">
 				<input type="text" name="title" placeholder="글제목"><br>
-				<input type="text" name="writer" value="작성자 : <%=session.getAttribute("id")%>" readonly><br>
+				<input type="text" name="writer" value="<%=session.getAttribute("id")%>" readonly><br>
 				
 				<textarea name="content" placeholder="글내용"></textarea><br>
 				<button type="button" onclick="location='<%=request.getContextPath()%>/index.jsp'">목록보기</button>
