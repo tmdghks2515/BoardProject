@@ -23,5 +23,12 @@ create table board_comment(
 
 alter table board_comment modify(blike default 0);
 alter table board_comment modify(bhate default 0);
+alter table board_comment rename column blike to clike;
+alter table board_comment rename column bhate to chate;
 
-alter table
+alter table board modify(blike default 0);
+alter table board modify(bhate default 0);
+
+--시퀀스 생성
+create sequence bno_seq start with 1 nomaxvalue;
+create sequence cno_seq start with 1 nomaxvalue;
