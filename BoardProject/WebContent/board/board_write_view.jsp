@@ -24,6 +24,7 @@
 		height:300px;
 		resize: none;
 	}
+	
 </style>
 </head>
 <body>
@@ -36,10 +37,11 @@
 				<input type="text" name="writer" value="<%=session.getAttribute("id")%>" readonly><br>
 				
 				<textarea name="content" placeholder="글내용"></textarea><br>
-				<button type="button" onclick="location='<%=request.getContextPath()%>/index.jsp'">목록보기</button>
+				<button type="button" onclick="location='<%=request.getContextPath()%>/board/board_list_view.jsp'">목록보기</button>
 				<button>글쓰기</button>
 				<button type="button" onclick="history.back();">뒤로가기</button>
 			</form>
+
 		</div>
 	</div>
 	<jsp:include page="/template/footer.jsp"></jsp:include>
