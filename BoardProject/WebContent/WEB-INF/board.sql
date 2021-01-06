@@ -20,6 +20,8 @@ create table board_comment(
 	constraint fk_bno foreign key(bno) references board(bno),
 	constraint fk_writer2 foreign key(writer) references member(id)
 )
+alter table board modify(blike default 0);
+alter table board modify(bhate default 0);
 
 alter table board_comment modify(blike default 0);
 alter table board_comment modify(bhate default 0);
@@ -41,3 +43,10 @@ select sysdate from dual;
 SELECT BNO_SEQ.NEXTVAL FROM DUAL;
 drop sequence bno_seq;
 create sequence bno_seq start with 1 nomaxvalue;
+
+select * from board;
+alter table board modify bcount default 0;
+update board set bcount = bcount + 1 where bno = 30;
+
+update board set blike = blike + 1 where bno=40;
+select bno,title,bdate,bcount,writer,content,blike,bhate from board where bno = 30;

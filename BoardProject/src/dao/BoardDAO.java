@@ -66,12 +66,12 @@ public class BoardDAO {
 		BoardDTO dto = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from board where bno = "+bno;
+		String sql = "select bno,title,bdate,bcount,writer,content,blike,bhate from board where bno = "+bno;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			if(rs.next())
-				dto = new BoardDTO(rs.getInt(1), rs.getString(8), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getInt(7));
+				dto = new BoardDTO(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getInt(8));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -79,6 +79,36 @@ public class BoardDAO {
 		}
 		
 		return dto;
+	}
+
+	public void addCount(int bno) {
+		PreparedStatement pstmt = null;
+		String sql = "update board set bcount = bcount + 1 where bno = "+bno;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			manager.close(pstmt, null);
+		}
+	}
+
+	public void LikeHate(int bno,int index) {
+		PreparedStatement pstmt = null;
+		String sql1 = "update board set blike = blike + 1 where bno="+bno;
+		String sql2 = "update board set bhate = bhate+ 1 where bno="+bno;
+		try {
+			if(index == 0)
+				pstmt = conn.prepareStatement(sql1);
+			else
+				pstmt = conn.prepareStatement(sql2);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			manager.close(pstmt, null);
+		}
 	}
 	
 	

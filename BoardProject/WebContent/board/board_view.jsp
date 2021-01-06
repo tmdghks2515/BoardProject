@@ -1,9 +1,11 @@
+<%@page import="service.BoardService"%>
 <%@page import="dao.BoardDAO"%>
 <%@page import="dto.BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>게시글</title>
@@ -55,11 +57,28 @@
 		text-decoration: none;
 	}
 </style>
+	<%
+		BoardDTO dto = BoardService.getInstance().selectBoardDTO(Integer.parseInt(request.getParameter("bno")));
+	%>
+<script>
+	$(function(){
+		$("#btns img").click(function(){
+			var index = $("#btns img").index(this);
+			var bno = <%=dto.getBno()%>;
+			var data = "index="+index+"&bno="+bno;
+			$.ajax({
+				url:'process/board_like_hate_process.jsp',
+				data:data,
+				method:'get',
+				success:function(d){
+					$("th span").eq(index).html(d);			
+				}
+			})
+		})
+	})
+</script>
 </head>
 <body>
-	<%
-		BoardDTO dto = BoardDAO.getInstance().selectBoardDTO(Integer.parseInt(request.getParameter("bno")));
-	%>
 	<jsp:include page="/template/header.jsp"></jsp:include>
 	<div id="container">
 		<table>
@@ -69,8 +88,8 @@
 				<th>작성자: <%=dto.getWriter() %>
 				<th>조회수: <%=dto.getbCount() %></th>
 				<th>작성일: <%=dto.getbDate() %></th>
-				<th>좋아요: <%=dto.getbLike() %></th>
-				<th>싫어요: <%=dto.getbHate()%></th>
+				<th>좋아요: <span><%=dto.getbLike() %></span></th>
+				<th>싫어요: <span><%=dto.getbHate()%></span></th>
 			</tr>
 		</table>
 		<div id="content">
