@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import config.DBManager;
 import dto.BoardDTO;
@@ -109,6 +110,25 @@ public class BoardDAO {
 		}finally {
 			manager.close(pstmt, null);
 		}
+	}
+
+	public ArrayList<BoardDTO> selectAll() {
+		ArrayList<BoardDTO> li = new ArrayList<BoardDTO>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select bno,writer,title,bcount,bdate,blike,bhate from board";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				li.add(new BoardDTO(rs.getInt(1), rs.getString(3), rs.getString(5), rs.getInt(4), rs.getString(2), "", rs.getInt(6), rs.getInt(7)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			manager.close(pstmt, rs);
+		}
+		return li;
 	}
 	
 	

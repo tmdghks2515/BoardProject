@@ -1,5 +1,7 @@
 package service;
 
+import java.util.ArrayList;
+
 import dao.BoardDAO;
 import dto.BoardDTO;
 
@@ -32,5 +34,9 @@ public class BoardService {
 	
 	public void LikeHate(int bno, int index) {
 		dao.LikeHate(bno, index);
+	}
+	
+	public ArrayList<BoardDTO> selectAll() {
+		return BoardDAO.getInstance().selectAll();
 	}
 }
