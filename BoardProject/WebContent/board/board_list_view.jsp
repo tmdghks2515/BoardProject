@@ -37,6 +37,8 @@
 		float:left;
 		text-align: center;
 	}
+	#board_list span:nth-child(3){
+	}
 </style>
 <script>
 	$(function(){
