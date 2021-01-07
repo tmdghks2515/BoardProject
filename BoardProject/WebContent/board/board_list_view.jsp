@@ -10,6 +10,7 @@
 <title>게시판 목록</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
+
 	#container{
 		width:1200px;
 		margin:0 auto;
@@ -28,7 +29,7 @@
 		text-decoration: none;
 	}
 	#board_list p:hover{
-		background-color: #e8e8e8;
+		background-color: #f8f8f8;
 	}
 	#board_list span{
 		display:block;
@@ -37,8 +38,9 @@
 		float:left;
 		text-align: center;
 	}
-	#board_list span:nth-child(3){
-	}
+	/* .tit{
+		width:35% !important;
+	} */
 </style>
 <script>
 	$(function(){
@@ -59,7 +61,7 @@
 		<p style="background-color: #e8e8e8">
 			<span>글번호</span>
 			<span>작성자</span>
-			<span>글제목</span>
+			<span class="tit">글제목</span>
 			<span>조회수</span>
 			<span>작성일</span>
 			<span>좋아요</span>
@@ -72,7 +74,7 @@
 		<p><a href="#">
 			<span><%=li.get(i).getBno() %></span>
 			<span><%=li.get(i).getWriter() %></span>
-			<span><%=li.get(i).getTitle() %></span>
+			<span class="tit"><%=li.get(i).getTitle() %></span>
 			<span><%=li.get(i).getbCount() %></span>
 			<span><%=li.get(i).getbDate() %></span>
 			<span><%=li.get(i).getbLike() %></span>

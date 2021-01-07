@@ -58,7 +58,8 @@
 	}
 </style>
 	<%
-		BoardDTO dto = BoardService.getInstance().selectBoardDTO(Integer.parseInt(request.getParameter("bno")));
+		int bno = Integer.parseInt(request.getParameter("bno"));
+		BoardDTO dto = BoardService.getInstance().selectBoardDTO(bno);
 	%>
 <script>
 	$(function(){
@@ -103,10 +104,10 @@
 			<button type="button">수정</button>
 			<button type="button">삭제</button>
 			<%} %>
-			<a href="board_view.jsp?bno=<%=Integer.parseInt(request.getParameter("bno"))-1 %>" class="dash">이전글</a>
+			<a href="board_view.jsp?bno=<%=bno-1 %>" class="dash">이전글</a>
 			좋아요 <a href="#"><img src="<%=request.getContextPath()%>/img/like.png"></a>
 			싫어요 <a href="#"><img src="<%=request.getContextPath()%>/img/hate.png"></a>
-			<a href="board_view.jsp?bno=<%=Integer.parseInt(request.getParameter("bno"))+1 %>" class="dash">다음글</a>
+			<a href="board_view.jsp?bno=<%=bno+1 %>" class="dash">다음글</a>
 			<button type="button" onclick="location='board_list_view.jsp'">목록보기</button>
 		</div>
 		

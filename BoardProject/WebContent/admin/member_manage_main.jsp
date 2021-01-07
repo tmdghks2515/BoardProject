@@ -61,28 +61,27 @@ td{
 <script>
 	$(function() {
 		$("#btn_submit").click(function(e) {
+			e.preventDefault();
 			var data = $("#search").serialize();//kind=id&name=검색어
 			$.ajax({
 				url : "<%=request.getContextPath()%>/admin/process/ajax_search_process.jsp",
 				data : data,
 				method : 'get',
 				success : function(d) {
-					console.log(d);
-					var arr = d.replaceAll("\n","").split(",");
-					console.log(arr);
-					var result = "<table>";
-					for(i=0;i<arr.length-1;i++){
-						//한건당 한줄씩 표현
-						var txt = arr[i].split(" ");
-						result += "<tr><td>"+txt[0]+"</td>"+"<td>"+txt[1]+"</td>"+"<td>"+txt[2]+"</td>"
-						+"<td>"+txt[3]+"</td><td></td></tr>";
+					var json = JSON.parse(d);
+					var txt = "<table>";
+					for(i=0;i<json.result.length;i++){
+						txt += "<tr><td>"+json.result[i].id+"</td><td>"+json.result[i].name+"</td><td>"+json.result[i].age+"</td><td>"+json.result[i].grade+"</td></tr>";
 					}
-					arr += "</table>";
-					$("#content_area").html(result);
+					txt += "</table>";
+					$("#content_area").html(txt);
 				}
 			});
-			e.preventDefault();	
 		});
+		$("#search").keyup(function(){
+			$("#btn_submit").click();
+		})
+		
 		$(".update").click(function() {
 			//alert($(this).parent().parent().index());//현재 버튼이 속해있는 tr을 선택, 인덱스 번호 조회
 			var data = "";
@@ -135,7 +134,7 @@ td{
 					<option value="name">이름</option>
 					<option value="grade">등급</option>
 				</select>
-				<input type="text" name="search">
+				<input type="text" name="search" id="#search">
 				<button id="btn_submit">검색</button>
 			</form>
 		</div>

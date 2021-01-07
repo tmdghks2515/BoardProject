@@ -1,3 +1,5 @@
+<%@page import="org.json.JSONArray"%>
+<%@page import="org.json.JSONObject"%>
 <%@page import="vo.MemberVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="service.MemberService"%>
@@ -12,15 +14,20 @@
 	//검색 결과를 받아서 클라이언트에게 출력 
 	if(kind.equals("grade"))
 		kind = "grade_name";
-	search = search.toUpperCase();
+	//search = search.toUpperCase();
 	ArrayList<MemberVO> list = MemberService.getInstance().searchMember(kind,search);
-	String result = "";
+	JSONObject jo = new JSONObject();
+	JSONArray ja = new JSONArray();
 	for(int i=0;i<list.size();i++){
-		result += list.get(i).getId() + " " + list.get(i).getName()
-				+ " " + list.get(i).getAge() + " " + list.get(i).getGrade()+",";
-		
+		JSONObject temp = new JSONObject();
+		temp.put("id",list.get(i).getId());
+		temp.put("name",list.get(i).getName());
+		temp.put("age",list.get(i).getAge());
+		temp.put("grade",list.get(i).getGrade());
+		ja.put(temp);
 	}
-	out.write(result);	
+	jo.put("result",ja);
+	out.write(jo.toString());
 	
 %>
 
