@@ -98,7 +98,9 @@
 			location="board/board_write_view.jsp";			
 			<%
 				}else{
+					session.setAttribute("url", request.getContextPath()+"/board/board_write_view.jsp");
 			%>
+			
 			alert("로그인이 필요합니다.");
 			location="member/login.jsp";
 			<%}%>

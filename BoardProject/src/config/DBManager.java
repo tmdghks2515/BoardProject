@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 public class DBManager {
 	private static DBManager instance = new DBManager();
 	private DataSource source;
-	
 	private DBManager() {
 		Context context;
 		try {

@@ -83,6 +83,24 @@
 		float:right;
 		padding:5px 10px;
 	}
+	/*경고창**************************************/
+	#alert{
+		width:300px;
+		height:130px;
+		text-align: center;
+		padding:20px;
+		border:1px solid gray;
+		background-color: tomato;
+		color:white;
+		position:fixed;
+		top:100px;
+		left:800px;
+		display: none;
+	}
+	#alert button{
+		margin:30px;
+		padding:5px 20px;
+	}
 </style>
 <script>
 	$(function(){
@@ -95,15 +113,17 @@
 			<%
 				if(session.getAttribute("login") != null && (boolean)session.getAttribute("login")){
 			%>
-			location="board/board_write_view.jsp";			
+			location="board_write_view.jsp";			
 			<%
 				}else{
 			%>
-			alert("로그인이 필요합니다.");
-			location="../member/login.jsp";
+			$("#alert").css("display","block");
 			<%}%>
 		})
 		
+		$("#alert button").click(function(){
+			location.href="<%=request.getContextPath()%>/member/login.jsp";
+		})
 	})
 	
 </script>
@@ -154,6 +174,10 @@
 			<a href="#">5</a>
 			<a href="#">&gt;&gt;</a>
 			<button type="button">글쓰기</button>
+		</div>
+		<div id="alert">
+			로그인 후 이용하실수 있습니다<br>
+			<button type="button">확인</button>		
 		</div>
 	</div>
 </div>

@@ -22,7 +22,13 @@
 		session.setAttribute("id", vo.getId());
 		session.setAttribute("grade", vo.getGrade().toLowerCase());
 		
-		response.sendRedirect(request.getContextPath()+"/index.jsp");
+		if(session.getAttribute("url")!=null){
+			String url = (String)session.getAttribute("url");
+			session.removeAttribute("url");
+			response.sendRedirect(url);
+		}else{
+			response.sendRedirect(request.getContextPath()+"/index.jsp");
+		}
 		
 	}
 
