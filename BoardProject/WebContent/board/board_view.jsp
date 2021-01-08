@@ -99,7 +99,7 @@
 		<br><hr>
 		<div id="btns">
 			<%
-				if(session.getAttribute("id").equals(dto.getWriter())){
+				if(session.getAttribute("id") != null && session.getAttribute("id").equals(dto.getWriter())){
 			%>
 			<button type="button">수정</button>
 			<button type="button">삭제</button>

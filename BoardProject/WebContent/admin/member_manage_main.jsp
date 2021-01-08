@@ -71,7 +71,12 @@ td{
 					var json = JSON.parse(d);
 					var txt = "<table>";
 					for(i=0;i<json.result.length;i++){
-						txt += "<tr><td>"+json.result[i].id+"</td><td>"+json.result[i].name+"</td><td>"+json.result[i].age+"</td><td>"+json.result[i].grade+"</td></tr>";
+						txt += "<tr><td><input type='hidden' name='id' value='"
+						+json.result[i].id+"'>"+json.result[i].id
+						+"</td><td><input type='text' name='name' value='"
+						+json.result[i].name+"'</td><td><input type='text' name='age' value='"
+						+json.result[i].age+"'</td><td><input type='text' name='grade' value='"
+						+json.result[i].grade+"'</td></tr>";
 					}
 					txt += "</table>";
 					$("#content_area").html(txt);

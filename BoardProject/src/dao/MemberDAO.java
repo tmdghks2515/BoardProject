@@ -5,15 +5,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 import config.DBManager;
 import exception.MemberException;
 import vo.MemberVO;
 
 public class MemberDAO {
 	private static MemberDAO instance = new MemberDAO();
-	
+	DBManager manager;
 	private MemberDAO() {
-
+		manager = DBManager.getInstance();
 	}
 
 	public static MemberDAO getInstance() {
@@ -25,10 +26,11 @@ public class MemberDAO {
 	public MemberVO selectMemberVO(String id) {
 		MemberVO vo = null;
 		String sql = "select * from member where id like ?";
+		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt = manager.getSource().getConnection().prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -47,7 +49,7 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		String sql = "insert into member(id,pass,name,age) values(?,?,?,?)";
 		try {
-			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt = manager.getSource().getConnection().prepareStatement(sql);
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getPass());
 			pstmt.setString(3, vo.getName());
@@ -64,7 +66,7 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		String sql = "update  member set pass = ? where id = ?";
 		try {
-			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt = manager.getSource().getConnection().prepareStatement(sql);
 			pstmt.setString(1, pass);
 			pstmt.setString(2,id);
 			int count = pstmt.executeUpdate();
@@ -82,7 +84,7 @@ public class MemberDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt = manager.getSource().getConnection().prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, pass);
 			rs = pstmt.executeQuery();
@@ -102,7 +104,7 @@ public class MemberDAO {
 		String sql = "update member set pass=?,name=?,age=? where id=?";
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt = manager.getSource().getConnection().prepareStatement(sql);
 			pstmt.setString(1, vo.getPass());
 			pstmt.setString(2, vo.getName());
 			pstmt.setInt(3, vo.getAge());
@@ -124,7 +126,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		 
 		try {
-			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt = manager.getSource().getConnection().prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -149,7 +151,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		
 		try {
-			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt = manager.getSource().getConnection().prepareStatement(sql);
 			pstmt.setString(1, "%" + search + "%");
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -172,7 +174,7 @@ public class MemberDAO {
 		
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = DBManager.getInstance().getConn().prepareStatement(sql);
+			pstmt = manager.getSource().getConnection().prepareStatement(sql);
 			pstmt.setString(1, vo.getName());
 			pstmt.setInt(2, vo.getAge());
 			pstmt.setString(3, vo.getGrade());
