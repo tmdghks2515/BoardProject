@@ -29,7 +29,7 @@
 		height:100%;
 	}
 	#board_list p:hover{
-		background-color: #f8f8f8;
+		background-color: #eeeeee;
 	}
 	.head{
 		background-color: #e8e8e8;
@@ -88,19 +88,18 @@
 	$(function(){
 		$("#board_list>p a").click(function(){
 			var bno = $(this).parents("span").prev().text();
-			location="board/board_view.jsp?bno="+bno;
+			location="<%=request.getContextPath()%>/board/board_view.jsp?bno="+bno;
 		})
 		
 		$("#bot button").click(function(){
 			<%
 				if(session.getAttribute("login") != null && (boolean)session.getAttribute("login")){
 			%>
-			location="board/board_write_view.jsp";			
+			location="<%=request.getContextPath()%>/board/board_write_view.jsp";			
 			<%
 				}else{
 					session.setAttribute("url", request.getContextPath()+"/board/board_write_view.jsp");
 			%>
-			
 			alert("로그인이 필요합니다.");
 			location="member/login.jsp";
 			<%}%>

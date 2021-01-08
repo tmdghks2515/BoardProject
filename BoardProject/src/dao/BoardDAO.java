@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import config.DBManager;
 import dto.BoardDTO;
+import dto.CommentDTO;
 
 public class BoardDAO {
 	private static BoardDAO instance = new BoardDAO();
@@ -120,6 +121,43 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				li.add(new BoardDTO(rs.getInt(1), rs.getString(3), rs.getString(5), rs.getInt(4), rs.getString(2), rs.getString(8), rs.getInt(6), rs.getInt(7)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			manager.close(pstmt, rs);
+		}
+		return li;
+	}
+
+	public void insertCommantDTO(CommentDTO dto) throws Exception {
+		PreparedStatement pstmt = null;
+		String sql = "insert into board_comment values(cno_seq.nextval,?,?,sysdate,?,0,0)";
+		try {
+			pstmt = manager.getSource().getConnection().prepareStatement(sql);
+			pstmt.setInt(1, dto.getbNo());
+			pstmt.setString(2, dto.getContent());
+			pstmt.setString(3, dto.getWriter());
+			int count = pstmt.executeUpdate();
+			if(count != 1)
+				throw new Exception("댓글 추가 실패");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			manager.close(pstmt, null);
+		}
+	}
+
+	public ArrayList<CommentDTO> selectComments(int bno) {
+		ArrayList<CommentDTO> li = new ArrayList<CommentDTO>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from board_comment where bno = "+bno;
+		try {
+			pstmt = manager.getSource().getConnection().prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				li.add(new CommentDTO(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getInt(7)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

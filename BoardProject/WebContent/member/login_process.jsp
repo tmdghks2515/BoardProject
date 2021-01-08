@@ -25,7 +25,10 @@
 		if(session.getAttribute("url")!=null){
 			String url = (String)session.getAttribute("url");
 			session.removeAttribute("url");
-			response.sendRedirect(url);
+			if(request.getParameter("bno")!=null)
+				response.sendRedirect(url+"?bno="+request.getParameter("bno"));
+			else
+				response.sendRedirect(url);
 		}else{
 			response.sendRedirect(request.getContextPath()+"/index.jsp");
 		}

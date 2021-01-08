@@ -4,5 +4,5 @@
 		type="javax.sql.DataSource" driverClassName="oracle.jdbc.OracleDriver" 
 		url="jdbc:oracle:thin:@localhost:1521:xe"
 		username="tmdghks" password="123456" defaultAutoCommit="true"
-		maxTotal="50" maxIdle="20" maxWaitMillis="-1" /> 
+		initialSize="50" maxActive="50" maxTotal="50" maxIdle="50" maxWait="10000" /> 
 </Context>

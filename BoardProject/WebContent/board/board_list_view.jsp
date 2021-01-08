@@ -101,6 +101,7 @@
 		margin:30px;
 		padding:5px 20px;
 	}
+
 </style>
 <script>
 	$(function(){

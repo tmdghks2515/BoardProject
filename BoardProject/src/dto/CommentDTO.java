@@ -6,16 +6,16 @@ public class CommentDTO {
 	private String content;
 	private String cDate;
 	private String writer;
-	private int cLick; 
+	private int cLike; 
 	private int cHate;
-	public CommentDTO(int cNo, int bNo, String content, String cDate, String writer, int cLick, int cHate) {
+	public CommentDTO(int cNo, int bNo, String content, String cDate, String writer, int cLike, int cHate) {
 		super();
 		this.cNo = cNo;
 		this.bNo = bNo;
 		this.content = content;
 		this.cDate = cDate;
 		this.writer = writer;
-		this.cLick = cLick;
+		this.cLike = cLike;
 		this.cHate = cHate;
 	}
 	public CommentDTO(int bNo, String content, String writer) {
@@ -54,11 +54,11 @@ public class CommentDTO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public int getcLick() {
-		return cLick;
+	public int getcLike() {
+		return cLike;
 	}
-	public void setcLick(int cLick) {
-		this.cLick = cLick;
+	public void setcLike(int cLike) {
+		this.cLike = cLike;
 	}
 	public int getcHate() {
 		return cHate;
@@ -69,7 +69,7 @@ public class CommentDTO {
 	@Override
 	public String toString() {
 		return "CommentDTO [cNo=" + cNo + ", bNo=" + bNo + ", content=" + content + ", cDate=" + cDate + ", writer="
-				+ writer + ", cLick=" + cLick + ", cHate=" + cHate + "]";
+				+ writer + ", cLike=" + cLike + ", cHate=" + cHate + "]";
 	}
 	
 }

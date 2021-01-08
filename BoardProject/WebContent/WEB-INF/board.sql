@@ -52,3 +52,5 @@ update board set blike = blike + 1 where bno=40;
 select bno,title,bdate,bcount,writer,content,blike,bhate from board where bno = 30;
 
 select * from board;
+select * from board_comment;
+alter table board_comment modify(content varchar2(1500 byte));

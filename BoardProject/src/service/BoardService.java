@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import dao.BoardDAO;
 import dto.BoardDTO;
+import dto.CommentDTO;
 
 public class BoardService {
 	private static BoardService instance = new BoardService();
@@ -38,5 +39,13 @@ public class BoardService {
 	
 	public ArrayList<BoardDTO> selectAll() {
 		return BoardDAO.getInstance().selectAll();
+	}
+	
+	public void insertCommentDTO(CommentDTO dto) throws Exception {
+		BoardDAO.getInstance().insertCommantDTO(dto);
+	}
+	
+	public ArrayList<CommentDTO> selectComments(int bno){
+		return BoardDAO.getInstance().selectComments(bno);
 	}
 }
